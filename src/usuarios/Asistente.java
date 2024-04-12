@@ -1,7 +1,6 @@
 package usuarios;
 
-import utils.Rol;
-
+import usuarios.utils.Rol;
 import java.time.LocalDate;
 
 public class Asistente extends Usuario {
@@ -10,17 +9,18 @@ public class Asistente extends Usuario {
     private String RFC;
     private String INE;
 
-    public Asistente(String nombre, String apellido, String telefono,
+    public Asistente(String nombre, String apellido, String telefono, String nombreUsuario, String contraseña,
                      LocalDate fechaInicio, Double sueldo, String RFC, String INE) {
-        super(nombre, apellido, telefono, Rol.ASISTENTE);
+        super(nombre, apellido, telefono, Rol.ASISTENTE, nombreUsuario, contraseña);
         this.fechaInicio = fechaInicio;
         this.sueldo = sueldo;
         this.RFC = RFC;
         this.INE = INE;
     }
+
     @Override
-    public String toString(){
-        return String.format("%s, Fecha de ingreso: %s, Sueldo: %.3f, RFC: %s, INE: %s "+
+    public String toString() {
+        return String.format("%s, Fecha de ingreso: %s, Sueldo: %.3f, RFC: %s, INE: %s, ",
                 super.toString(), fechaInicio, sueldo, RFC, INE);
     }
 }

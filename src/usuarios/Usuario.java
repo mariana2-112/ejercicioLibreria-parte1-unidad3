@@ -1,5 +1,5 @@
 package usuarios;
-import utils.Rol;
+import usuarios.utils.Rol;
 public class Usuario {
     private static int CANTIDAD_USUARIOS = 1;
     private int id;
@@ -7,13 +7,17 @@ public class Usuario {
     private String apellido;
     private String telefono;
     private Rol rol;
+    private String nombreUsuario;
+    private String contraseña;
 
-    public Usuario(String nombre, String apellido, String telefono, Rol rol) {
+    public Usuario(String nombre, String apellido, String telefono, Rol rol, String nombreUsuario, String contraseña) {
         this.id = CANTIDAD_USUARIOS;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.rol = rol;
+        this.nombreUsuario = nombreUsuario;
+        this.contraseña = contraseña;
         CANTIDAD_USUARIOS++;
     }
     @Override
@@ -68,5 +72,13 @@ public class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
     }
 }

@@ -1,12 +1,12 @@
 package usuarios;
-import utils.Rol;
+import usuarios.utils.Rol;
 import java.time.LocalDate;
 
 public class Cliente extends Usuario {
     private LocalDate fechaRegistro;
 
-    public Cliente(String nombre, String apellido, String telefono) {
-        super(nombre, apellido, telefono, Rol.CLIENTE);
+    public Cliente(String nombre, String apellido, String telefono, String nombreUsuario, String contraseña) {
+        super(nombre, apellido, telefono, Rol.CLIENTE, nombreUsuario, contraseña);
         this.fechaRegistro = LocalDate.now(); //Trae la fecha actual de la computadora.
     }
     public String toString() {
