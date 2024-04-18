@@ -9,7 +9,7 @@ public class Administrador extends Usuario {
 
     public Administrador(String nombre, String apellido, String telefono, String nombreUsuario, String contraseña,
                          Double sueldo, String RFC, String INE) {
-        super(nombre, apellido, telefono, Rol.GERENTE, nombreUsuario, contraseña); // Llamada al constructor del padre
+        super(nombre, apellido, telefono, Rol.ADMINISTRADOR, nombreUsuario, contraseña); // Llamada al constructor del padre
         this.sueldo = sueldo;
         this.RFC = RFC;
         this.INE = INE;

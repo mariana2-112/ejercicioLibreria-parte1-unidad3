@@ -9,8 +9,7 @@ public class Asistente extends Usuario {
     private String RFC;
     private String INE;
 
-    public Asistente(String nombre, String apellido, String telefono, String nombreUsuario, String contraseña,
-                     LocalDate fechaInicio, Double sueldo, String RFC, String INE) {
+    public Asistente(String nombre, String apellido, String telefono, double sueldo, String RFC, String nombreUsuario, String contraseña) {
         super(nombre, apellido, telefono, Rol.ASISTENTE, nombreUsuario, contraseña);
         this.fechaInicio = fechaInicio;
         this.sueldo = sueldo;

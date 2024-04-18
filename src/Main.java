@@ -6,7 +6,7 @@ import usuarios.utils.Rol;
 //Asistente - CRUD (Create, Reed, Update, Delete), consultar rentas
 //Gerente - CRUD completo del sistemea ademas de realizar rentas, eliminar asistentes y hacer rentas
 
-
+//CTRL+ALT+L
 public class Main {
     public static void main (String [] args) {
         Menu menu = new Menu();
