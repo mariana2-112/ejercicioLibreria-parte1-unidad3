@@ -127,7 +127,7 @@ public class Menu {
                             break;
                         case "3":
                             //Eliminar Cliente
-                            libreria.eliminarCliente();
+//                            libreria.eliminarCliente();
                             break;
                         case "4":
                             //Mostrar Clientes
@@ -209,7 +209,7 @@ public class Menu {
                             break;
                         case "3":
                             //Eliminar Cliente
-                            libreria.eliminarCliente();
+//                            libreria.eliminarCliente();
                             break;
                         case "4":
                             //Mostrar Clientes
