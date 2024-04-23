@@ -131,7 +131,7 @@ public class Menu {
                             break;
                         case "4":
                             //Mostrar Clientes
-                            libreria.mostrarClientes();
+
                             break;
                     }
                     break;
@@ -213,7 +213,7 @@ public class Menu {
                             break;
                         case "4":
                             //Mostrar Clientes
-                            libreria.mostrarClientes();
+
                             break;
                     }
                     break;
@@ -283,6 +283,7 @@ public class Menu {
                     switch (op3) {
                         case "1":
                             //Registrar Libros
+                            libreria.registrarLibro();
                             break;
                         case "2":
                             //Modificar Libro
@@ -292,6 +293,7 @@ public class Menu {
                             break;
                         case "4":
                             //Mostrar Libros
+                            libreria.mostrarLibros();
                             break;
                     }
                     break;
