@@ -26,14 +26,14 @@ public class DatosComun {
         System.out.println("Ingrese el apellido: ");
         String apellido = scanner.nextLine();
 
-        DatosComun datos = new DatosComun(); // Crear una instancia de DatosComun
+        DatosComun datos = new DatosComun();
         String telefono = datos.registrarTelefonoUsuario();
         String nombreUsuario = datos.registrarNombreUsuario();
 
         System.out.println("Ingrese la contraseña");
         String contraseña = scanner.nextLine();
 
-        datosComun.addAll(Arrays.asList(nombre, apellido, telefono, nombreUsuario, contraseña)); // Método addAll corregido
+        datosComun.addAll(Arrays.asList(nombre, apellido, telefono, nombreUsuario, contraseña));
 
         return datosComun;
     }
