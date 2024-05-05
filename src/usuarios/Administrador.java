@@ -2,21 +2,25 @@ package usuarios;
 
 import Libreria.Libreria;
 import Libreria.utils.DatosComun;
+import usuarios.utils.EmpleadoUtils;
 import usuarios.utils.Rol;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Administrador extends Usuario {
+public class Administrador extends Usuario implements EmpleadoUtils {
     private Double sueldo;
     private String RFC;
     private String INE;
+    private LocalDate fechaRegistro;
 
     public Administrador(String nombre, String apellido, String telefono, String nombreUsuario, String contraseña,
-                         Double sueldo, String RFC, String INE) {
+                         Double sueldo, String RFC, String INE, LocalDate fechaRegistro) {
         super(nombre, apellido, telefono, Rol.ADMINISTRADOR, nombreUsuario, contraseña);
         this.sueldo = sueldo;
         this.RFC = RFC;
         this.INE = INE;
+        this.fechaRegistro = fechaRegistro;
     }
 
     @Override
@@ -38,7 +42,9 @@ public class Administrador extends Usuario {
         String RFC = datosComun.get(6);
         String INE = datosComun.get(7);
 
-        Administrador administrador = new Administrador(nombre, apellido, telefono, nombreUsuario, contraseña, sueldo, RFC, INE);
+        LocalDate fechaRegistro = LocalDate.now();
+
+        Administrador administrador = new Administrador(nombre, apellido, telefono, nombreUsuario, contraseña, sueldo, RFC, INE, fechaRegistro);
 
         if (!Libreria.usuarios.containsKey(Rol.ADMINISTRADOR)) {
             Libreria.usuarios.put(Rol.ADMINISTRADOR, new ArrayList<Usuario>());
@@ -54,5 +60,14 @@ public class Administrador extends Usuario {
             Administrador administrador = (Administrador) usuario;
             System.out.println(administrador.toString());
         }
+    }
+
+    @Override
+    public void checarEntrada(){
+        System.out.println("Checar entrada con huella");
+    }
+    @Override
+    public void checarSalida(){
+        System.out.println("Checar entrada con huella");
     }
 }

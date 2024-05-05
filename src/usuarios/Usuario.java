@@ -1,6 +1,6 @@
 package usuarios;
 import usuarios.utils.Rol;
-public class Usuario {
+public abstract class Usuario {
     private static int CANTIDAD_USUARIOS = 1;
     private int id;
     private String nombre;

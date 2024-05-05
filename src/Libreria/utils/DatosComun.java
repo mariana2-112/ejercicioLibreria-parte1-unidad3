@@ -4,6 +4,7 @@ import Libreria.Libreria;
 import usuarios.Usuario;
 import usuarios.utils.Rol;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class DatosComun {
 
         System.out.println("\nIngresa los siguientes datos para continuar con el registro: ");
 
-        System.out.print("\n Ingrese el nombre: ");
+        System.out.print("\nIngrese el nombre: ");
         String nombre = scanner.nextLine();
 
         System.out.println("Ingrese el apellido: ");
@@ -33,7 +34,19 @@ public class DatosComun {
         System.out.println("Ingrese la contraseña");
         String contraseña = scanner.nextLine();
 
-        datosComun.addAll(Arrays.asList(nombre, apellido, telefono, nombreUsuario, contraseña));
+        System.out.println("Ingrese el día, mes y año de nacimiento");
+        int dia = scanner.nextInt();
+        int mes = scanner.nextInt();
+        int año = scanner.nextInt();
+
+        LocalDate fechaNacimiento = LocalDate.of(año, mes, dia);
+        String fechaNacimientoString = fechaNacimiento.toString();
+
+        // Agregar la fecha actual de registro
+        LocalDate fechaRegistro = LocalDate.now();
+        String fechaRegistroString = fechaRegistro.toString();
+
+        datosComun.addAll(Arrays.asList(nombre, apellido, telefono, nombreUsuario, contraseña, fechaNacimientoString, fechaRegistroString));
 
         return datosComun;
     }

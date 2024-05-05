@@ -2,29 +2,32 @@ package usuarios;
 
 import Libreria.Libreria;
 import Libreria.utils.DatosComun;
+import usuarios.utils.EmpleadoUtils;
 import usuarios.utils.Rol;
+
 import java.time.LocalDate;
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
-public class Asistente extends Usuario {
+public class Asistente extends Usuario implements EmpleadoUtils {
     private LocalDate fechaInicio;
     private Double sueldo;
     private String RFC;
     private String INE;
+    private LocalDate fechaRegistro;
 
-    public Asistente(String nombre, String apellido, String telefono, double sueldo, String RFC, String nombreUsuario, String contraseña) {
+    public Asistente(String nombre, String apellido, String telefono, double sueldo, String RFC, String INE, String nombreUsuario, String contraseña, LocalDate fechaRegistro) {
         super(nombre, apellido, telefono, Rol.ASISTENTE, nombreUsuario, contraseña);
-        this.fechaInicio = fechaInicio;
+        this.fechaInicio = LocalDate.now();
         this.sueldo = sueldo;
         this.RFC = RFC;
         this.INE = INE;
+        this.fechaRegistro = fechaRegistro;
     }
 
     @Override
     public String toString() {
-        return String.format("%s, Fecha de ingreso: %s, Sueldo: %.3f, RFC: %s, INE: %s, ",
+        return String.format("%s, Fecha de ingreso: %s, Sueldo: %.3f, RFC: %s, INE: %s",
                 super.toString(), fechaInicio, sueldo, RFC, INE);
     }
 
@@ -45,7 +48,9 @@ public class Asistente extends Usuario {
         System.out.println("\nIngresa el INE: ");
         String INE = new Scanner(System.in).nextLine();
 
-        Asistente asistente = new Asistente(nombre, apellido, telefono, sueldo, RFC, nombreUsuario, contraseña);
+        LocalDate fechaRegistro = LocalDate.now();
+
+        Asistente asistente = new Asistente(nombre, apellido, telefono, sueldo, RFC, INE, nombreUsuario, contraseña, fechaRegistro);
 
         if (!Libreria.usuarios.containsKey(Rol.ASISTENTE)) {
             Libreria.usuarios.put(Rol.ASISTENTE, new ArrayList<Usuario>());
@@ -63,4 +68,14 @@ public class Asistente extends Usuario {
         }
     }
 
+    @Override
+    public void checarEntrada() {
+        System.out.println("Checar entrada por correo");
+    }
+
+    @Override
+    public void checarSalida() {
+        System.out.println("Checar salida por correo");
+    }
 }
+
