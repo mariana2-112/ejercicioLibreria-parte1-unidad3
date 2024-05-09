@@ -1,10 +1,18 @@
 package Libreria;
 
+import Libros.Libro;
+import Libros.LibroAccion;
+import Libros.LibroComedia;
+import Libros.LibroTerror;
+import usuarios.Asistente;
+import usuarios.Cliente;
 import usuarios.Usuario;
 import utils.UsuarioEnSesion;
 
-import java.sql.SQLOutput;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import usuarios.Administrador;
+
 
 /*
 ELIMINAR CLIENTES, ASISTENTES Y GERENTES
@@ -18,6 +26,7 @@ public class Menu {
     boolean datosCorrectos;
     private boolean salir = false;
 
+
     public void iniciarSesion() {
         do {
             System.out.println("Bienvenido a la Biblioteca");
@@ -28,7 +37,10 @@ public class Menu {
 
             System.out.println("Ingresa tu contraseña");
             String contraseña = scanner.nextLine();
+
+            // Aquí es donde necesitas llamar al método verificarInicioSesion desde la instancia de Libreria
             Usuario usuarioActual = libreria.verificarInicioSesion(usuario, contraseña);
+
             if (usuarioActual != null) {
                 datosCorrectos = true;
                 UsuarioEnSesion.obtenerInstancia().setUsuarioActual(usuarioActual);
@@ -40,6 +52,7 @@ public class Menu {
 
         } while (!datosCorrectos);
     }
+
 
     private void seleccionarMenu() {
         Usuario usuario = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
@@ -98,82 +111,88 @@ public class Menu {
 
 
     private void mostrarMenuAsistente() {
-        do {
-            System.out.println("----- Menu Asistente :) ------");
-            System.out.println("Elige la opcion: ");
-            System.out.println("1. Clientes");
-            System.out.println("2. Libros");
-            System.out.println("3. Cerrar Sesion");
+        Scanner scanner = new Scanner(System.in);
 
-            String opcion = scanner.nextLine();
+        int opcion = 0;
+        do {
+            System.out.println("\nMenú Asistente");
+            System.out.println("Selecciona una opción para continuar");
+            System.out.println("1. Registrar Cliente");
+            System.out.println("2. Mostrar Clientes");
+            System.out.println("3. Registrar libro");
+            System.out.println("4. Mostrar libros");
+            System.out.println("5. Cerrar sesión");
+
+            System.out.println("Ingresa la opción: ");
+            opcion = scanner.nextInt();
 
             switch (opcion) {
-
-                case "1":
-                    // Clientes
-                    System.out.println("Opción 1 seleccionada");
-                    System.out.println("1. Registrar Cliente");
-                    System.out.println("2. Modificar Cliente");
-                    System.out.println("3. Eliminar Cliente");
-                    System.out.println("4. Mostrar Clientes");
-                    String op = scanner.nextLine();
-                    switch (op) {
-                        case "1":
-                            //Registrar Cliente
-                            libreria.registrarCliente();
-                            break;
-                        case "2":
-                            //Modificar Cliente
-                            break;
-                        case "3":
-                            //Eliminar Cliente
-//                            libreria.eliminarCliente();
-                            break;
-                        case "4":
-                            //Mostrar Clientes
-
-                            break;
-                    }
+                case 1:
+                    Cliente.registrarCliente();
                     break;
-
-                case "2":
-                    // Libro
-                    System.out.println("Opción 4 seleccionada");
-                    System.out.println("1. Registrar Libro");
-                    System.out.println("2. Modificar Libro");
-                    System.out.println("3. Eliminar Libro");
-                    System.out.println("4. Mostrar Libros");
-                    System.out.println("5. Mostrar Libros Rentados");
-                    System.out.println("6. Rentar libro");
-                    String op3 = scanner.nextLine();
-                    switch (op3) {
-                        case "1":
-                            //Registrar Libros
-                            break;
-                        case "2":
-                            //Modificar Libro
-                            break;
-                        case "3":
-                            //Eliminar Libro
-                            break;
-                        case "4":
-                            //Mostrar Libros
-                            break;
-                    }
+                case 2:
+                    Cliente.mostrarClientes();
                     break;
-
-                case "3":
+                case 3:
+                    menuRegistrarLibro();
+                    break;
+                case 4:
+                    break;
+                case 5:
                     UsuarioEnSesion.obtenerInstancia().cerrarSesion();
                     iniciarSesion();
                     break;
-                default:
-                    System.out.println("Ingrese una opcion valida");
             }
-
-        } while (!salir);
+        } while(opcion != 5);
     }
 
+    private void menuRegistrarLibro() {
+        Scanner scanner = new Scanner(System.in);
+        int opcionMenuRegistrarLibro = 0;
+        boolean esDatoValido = false;
 
+        do {
+            System.out.println("\nRegistrar libro");
+            System.out.println("Ingresa el tipo de libro que deseas registrar");
+            System.out.println("1. Acción");
+            System.out.println("2. Comedia");
+            System.out.println("3. Terror");
+            System.out.println("4. Salir");
+
+            while (!esDatoValido) {
+                try {
+                    opcionMenuRegistrarLibro = scanner.nextInt();
+
+                    if (opcionMenuRegistrarLibro > 4 || opcionMenuRegistrarLibro < 1) {
+                        throw new InputMismatchException();
+                    }
+                    esDatoValido = true;
+                } catch (InputMismatchException error) {
+                    System.out.println("Ingresaste un valor incorrecto, intenta de nuevo");
+                } finally {
+                    scanner.nextLine();
+                }
+            }
+
+            esDatoValido = false;
+
+            switch (opcionMenuRegistrarLibro) {
+                case 1:
+                    System.out.println("Accion");
+                    LibroAccion.registrarLibros();
+                    break;
+                case 2:
+                    System.out.println("Comedia");
+                    LibroComedia.registrarLibros();
+                    break;
+                case 3:
+                    System.out.println("Terror");
+                    LibroTerror.registrarLibros();
+                    break;
+            }
+
+        } while(opcionMenuRegistrarLibro != 4);
+    }
     ////////////////////////////////////  ADMINISTRADOR  ////////////////////////////////////////
 
     private void mostrarMenuAdministrador() {
@@ -202,7 +221,7 @@ public class Menu {
                     switch (op) {
                         case "1":
                             //Registrar Cliente
-                            libreria.registrarCliente();
+                            Cliente.registrarCliente();
                             break;
                         case "2":
                             //Modificar Cliente
@@ -229,7 +248,7 @@ public class Menu {
                     switch (op1) {
                         case "1":
                             //Registrar Asistente
-                            libreria.registrarAsistente();
+                            Asistente.registrarAsistente();
                             break;
                         case "2":
                             //Modificar Asistene
@@ -239,7 +258,7 @@ public class Menu {
                             break;
                         case "4":
                             //Mostrar Asistentes
-                            libreria.mostrarAsistentes();
+                            Asistente.mostrarAsistentes();
                             break;
                     }
                     break;
@@ -255,7 +274,7 @@ public class Menu {
                     switch (op2) {
                         case "1":
                             //Registrar Gerente
-                            libreria.registrarAdministrador();
+                            Administrador.registrarAdministrador();
                             break;
                         case "2":
                             //Modificar Gerente
@@ -265,7 +284,7 @@ public class Menu {
                             break;
                         case "4":
                             //Mostrar Gerentes
-                            libreria.mostrarAdministradores();
+                            Administrador.mostrarAdministradores();
                             break;
                     }
                     break;

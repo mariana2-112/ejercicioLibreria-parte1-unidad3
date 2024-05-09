@@ -27,9 +27,8 @@ public class DatosComun {
         System.out.println("Ingrese el apellido: ");
         String apellido = scanner.nextLine();
 
-        DatosComun datos = new DatosComun();
-        String telefono = datos.registrarTelefonoUsuario();
-        String nombreUsuario = datos.registrarNombreUsuario();
+        String telefono = registrarTelefonoUsuario();
+        String nombreUsuario = registrarNombreUsuario();
 
         System.out.println("Ingrese la contraseña");
         String contraseña = scanner.nextLine();
@@ -51,7 +50,7 @@ public class DatosComun {
         return datosComun;
     }
 
-    public String registrarTelefonoUsuario() {
+    private static String registrarTelefonoUsuario() {
         Scanner scanner = new Scanner(System.in);
 
         boolean telefonoExistente = true;
@@ -62,7 +61,7 @@ public class DatosComun {
             telefono = scanner.nextLine();
 
             telefonoExistente = false;
-            for (Map.Entry<Rol, ArrayList<Usuario>> entry : Libreria.usuarios.entrySet()) {
+            for (Map.Entry<Rol, ArrayList<Usuario>> entry : Libreria.getUsuarios().entrySet()) {
                 for (Usuario usuario : entry.getValue()) {
                     if (usuario.getTelefono().equals(telefono)) {
                         telefonoExistente = true;
@@ -77,7 +76,7 @@ public class DatosComun {
         return telefono;
     }
 
-    public String registrarNombreUsuario() {
+    private static String registrarNombreUsuario() {
         Scanner scanner = new Scanner(System.in);
         boolean nombreUsuarioExistente = true;
         String nombreUsuario = "";
@@ -88,7 +87,7 @@ public class DatosComun {
 
             nombreUsuarioExistente = false;
 
-            for (Map.Entry<Rol, ArrayList<Usuario>> entry : Libreria.usuarios.entrySet()) {
+            for (Map.Entry<Rol, ArrayList<Usuario>> entry : Libreria.getUsuarios().entrySet()) {
                 for (Usuario usuario : entry.getValue()) {
                     if (usuario.getNombreUsuario().equals(nombreUsuario)) {
                         nombreUsuarioExistente = true;
