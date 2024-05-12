@@ -4,7 +4,8 @@ import Libros.constants.Genero;
 
 import java.time.LocalDate;
 
-public class Libro {
+public abstract class Libro {
+
     private static int CANTIDAD_LIBROS = 1;
     private int id;
     private String nombre;
@@ -38,4 +39,17 @@ public class Libro {
                 ", stock=" + stock +
                 '}';
     }
+
+    protected abstract void filtrarPorPrecioMeyorA(double precio);
+
+    protected abstract void filtrarLibroPorInicialDeAutor(String inicial);
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
 }
+

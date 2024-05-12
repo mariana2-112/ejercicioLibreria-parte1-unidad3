@@ -42,5 +42,19 @@ public class LibroTerror extends Libro {
         LibroTerror libroTerror = new LibroTerror(nombre, autor, editorial, fechaPublicacion, precio, stock, subgeneroInput);
         System.out.println("\nRegistro exitoso de libro de terror.");
     }
+
+    @Override
+    public void filtrarPorPrecioMeyorA(double precio) {
+        Libreria.getLibros().get(Genero.TERROR).stream().filter(libro -> libro.getPrecio() > precio).forEach(libro -> System.out.println(libro.toString()));
+    }
+
+    @Override
+    public void filtrarLibroPorInicialDeAutor(String inicial) {
+        Libreria.getLibros().get(Genero.TERROR).stream().filter(libro -> libro.getAutor().toLowerCase().contains(inicial)).forEach(libro -> System.out.println(libro.toString()));
+    }
+
 }
+
+
+
 
